@@ -3,7 +3,7 @@ package route
 import (
 	"net/http"
 	"github.com/gorilla/mux"
-	"projetoPOC/controller"
+	"argus/controller"
 )
 
 type Route struct {
@@ -70,6 +70,13 @@ var routes = Routes{
 		"GET",
 		"/buscarTodasPessoas",
 		controller.BuscarTodasPessoa,
+	},
+
+	Route{
+		"Concorrencia",
+		"GET",
+		"/concorrencia",
+		controller.Concorrencia,
 	},
 }
 

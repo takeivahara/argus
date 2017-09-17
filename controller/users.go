@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 	"encoding/json"
-	"projetoPOC/model"
+	"argus/model"
 )
 
 func Users(w http.ResponseWriter, r *http.Request) {

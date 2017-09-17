@@ -1,34 +1,22 @@
 package repository
 
 import (
-	"projetoPOC/model"
-	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
+	"argus/model"
+	"encoding/json"
 )
+
 
 func SavePessoa(pessoa model.Pessoa) {
 
 }
-func BuscarTodasPessoa() []model.Pessoa {
+func BuscarTodasPessoa() model.PessoaBD {
 
 
-	db, err := sql.Open("mysql", "root:Admin@123@/teste_go")
-	if err != nil {
-		panic(err.Error())
+	jsonPessoa := retornarJsonGenerico("SELECT * FROM pessoa")
 
-	}
-
-	rows, err := db.Query("SELECT * FROM pessoa")
-	if err != nil {
-		panic(err.Error())
-	}
-
-	listPessoa:=[]model.Pessoa{}
-	for rows.Next() {
-		var pessoa model.Pessoa
-		rows.Scan(&pessoa.Id, &pessoa.Nome, &pessoa.Matricula, &pessoa.DataNascimento)
-		listPessoa = append(listPessoa, pessoa)
-	}
+	//listPessoa:=[]model.Pessoa{}
+	var jsontype model.PessoaBD
+	json.Unmarshal(jsonPessoa, &jsontype)
 	/*columns, err := rows.Columns()
 
 	if err != nil {
@@ -67,9 +55,8 @@ func BuscarTodasPessoa() []model.Pessoa {
 
 	}
 */
-	defer rows.Close()
-	defer db.Close()
 
-	return listPessoa
+
+	return jsontype
 }
 
